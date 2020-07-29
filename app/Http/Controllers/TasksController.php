@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Task;
 
 class TasksController extends Controller
 {
@@ -42,7 +43,11 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = new Task;
+        $task->content = $request->content;
+        $task->save();
+
+        return redirect('/');
     }
 
     /**
@@ -84,7 +89,12 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        
+        $task->content = $request->content;
+        $task->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -95,6 +105,10 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $task = Task::findOrFail($id);
+        
+         $task->delete();
+        
+        return redirect('/');
     }
 }
