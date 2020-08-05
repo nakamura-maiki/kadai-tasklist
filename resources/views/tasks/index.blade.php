@@ -1,7 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    {!! link_to_route('signup.get', '新規登録', [], ['class' => 'btn btn-lg btn-primary register_btn']) !!}
+
+    @if (Auth::check())
+        <div class="text-center  register_btn">
+        {{ Auth::user()->name. "さん、おかえりなさい" }}
+        </div>
+    @else
+        <!--<div class="center jumbotron">-->
+            <div class="text-center  register_btn">
+                {{-- ユーザ登録ページへのリンク --}}
+                {!! link_to_route('signup.get', '新規登録', [], ['class' => 'btn btn-lg btn-primary']) !!}
+            </div>
+        </div>
+    @endif
+
     
     <h1>タスク一覧</h1>
 
@@ -27,7 +40,8 @@
     @endif
         <style type="text/css">
             .register_btn{
-                margin-bottom: 50px;
+                font-size: 20px;
+                margin-bottom: 30px;
             }
         </style>
 
