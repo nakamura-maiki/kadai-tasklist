@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
+    {!! link_to_route('signup.get', '新規登録', [], ['class' => 'btn btn-lg btn-primary register_btn']) !!}
+    
     <h1>タスク一覧</h1>
 
     @if (count($tasks) > 0)
@@ -24,5 +25,10 @@
             </tbody>
         </table>
     @endif
+        <style type="text/css">
+            .register_btn{
+                margin-bottom: 10px;
+            }
+        </style>
 
 @endsection
