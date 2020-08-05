@@ -6,7 +6,7 @@
     <h1>タスク一覧</h1>
 
     @if (count($tasks) > 0)
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>id</th>
@@ -27,7 +27,7 @@
     @endif
         <style type="text/css">
             .register_btn{
-                margin-bottom: 10px;
+                margin-bottom: 50px;
             }
         </style>
 
