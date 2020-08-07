@@ -43,15 +43,24 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        
+        //バリデーション
         $request->validate([
             "status" => "required|max:10",
             'content' => 'required|max:255',
         ]);
         
-        $task = new Task;
-        $task->content = $request->content;
-        $task->status = $request->status;
-        $task->save();
+        
+        // $task = new Task;
+     
+        // $task->status = $request->status;
+        $request->user()->tasks()->create([
+            'content' => $request->content,
+            'status' => $request->status
+         ]);
+         
+        // $task->save();
+        
 
         return redirect('/');
     }
@@ -65,10 +74,16 @@ class TasksController extends Controller
     public function show($id)
     {
         $task = Task::findOrFail($id);
+    // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿の詳細表示
+        if (\Auth::id() === $task->user_id) {
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
+        }
+        // トップへリダイレクトさせる
+        return redirect('/');
 
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+    
     }
 
     /**
@@ -118,9 +133,13 @@ class TasksController extends Controller
     public function destroy($id)
     {
          $task = Task::findOrFail($id);
+
+        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
+        if (\Auth::id() === $task->user_id) {
+            $task->delete();
+        }
         
-         $task->delete();
-        
+        // トップへリダイレクトさせる
         return redirect('/');
     }
 }

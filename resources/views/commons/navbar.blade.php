@@ -11,12 +11,12 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 @if (Auth::check())
+                     {{-- タスク作成ページへのリンク --}}
+                    <li class="nav-item">{!! link_to_route('tasks.create', '新規タスクの投稿', [], ['class' => 'nav-link']) !!}</li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- ユーザ詳細ページへのリンク --}}
-                            <li class="dropdown-item"><a href="#">My profile</a></li>
-                            <li class="dropdown-divider"></li>
+                            <!--<li class="dropdown-divider"></li>-->
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
                         </ul>
@@ -29,8 +29,8 @@
                 @endif
                 
                 
-            <!--    {{-- タスク作成ページへのリンク --}}-->
-            <!--    <li class="nav-item">{!! link_to_route('tasks.create', '新規タスクの投稿', [], ['class' => 'nav-link']) !!}</li>-->
+                <!--{{-- タスク作成ページへのリンク --}}-->
+                <!--<li class="nav-item">{!! link_to_route('tasks.create', '新規タスクの投稿', [], ['class' => 'nav-link']) !!}</li>-->
             <!--</ul>-->
             
             <!--<ul class="nav navbar-nav navbar-right">-->
