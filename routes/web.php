@@ -25,5 +25,6 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 //ログイン認証がとれたもののみアクセス可能にする
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('microposts', 'TasksController', ['only' => ['show', 'edit', 'destroy']]);
+    Route::resource('users', 'UsersController', ['only' => ['index']]);
+    Route::resource('taskss', 'TasksController', ['only' => ['show', 'edit', 'destroy']]);
 });
